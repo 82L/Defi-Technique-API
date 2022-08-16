@@ -16,7 +16,12 @@ module.exports = {
     ** which gets resolved or rejected based
     ** on the result from the API
     */
-    make_API_call : function(city){
+    /**
+     *
+     * @param city
+     * @returns {Promise<String>}
+     */
+    make_API_call : function(city =null){
         if(!city){
             city = cities.citiesArray[getRandomInt(cities.citiesArray.length)];
         }
@@ -24,7 +29,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             request(url, options, (err, res, body) => {
                 if (err) reject(err)
-                resolve(JSON.parse(body))
+                resolve(body)
             });
         })
     }
