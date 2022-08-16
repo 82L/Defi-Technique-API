@@ -1,7 +1,7 @@
 
 
 const request = require('request');
-
+const cities = require('./cities')
 let options = {
     method: 'GET',
     headers: {
@@ -17,14 +17,20 @@ module.exports = {
     ** on the result from the API
     */
     make_API_call : function(city){
+        if(!city){
+            city = cities.citiesArray[getRandomInt(cities.citiesArray.length)];
+        }
         let url = 'https://open-weather13.p.rapidapi.com/city/' + city;
         return new Promise((resolve, reject) => {
             request(url, options, (err, res, body) => {
                 if (err) reject(err)
-                resolve(body)
+                resolve(JSON.parse(body))
             });
         })
     }
+}
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
 }
 
 
