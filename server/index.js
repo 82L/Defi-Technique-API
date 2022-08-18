@@ -12,7 +12,7 @@ let interval;
  * @type {{}}
  */
 app.get('/', async (req, res) => {
-    res.send(typeof await api_helper.make_API_call("landon"));
+    res.send(await api_helper.make_API_call());
 });
 
 io.on('connection', (socket) => {

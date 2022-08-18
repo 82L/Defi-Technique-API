@@ -2,13 +2,9 @@
 
 const request = require('request');
 const cities = require('./cities')
+const apiKey = '4c8468982915380a33a99ce272a87c59';
 let options = {
     method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '880c2c9a30mshf418b8cf219aa67p1a975cjsn2c01c5181736',
-        'X-RapidAPI-Host': 'open-weather13.p.rapidapi.com',
-        useQueryString: true
-    }
 };
 module.exports = {
     /*
@@ -21,12 +17,10 @@ module.exports = {
      * @param city
      * @returns {Promise<String>}
      */
-    make_API_call : function(city =null){
-        if(!city){
-            city = cities.citiesArray[getRandomInt(cities.citiesArray.length)];
-        }
-        let url = 'https://open-weather13.p.rapidapi.com/city/' + city;
-        return new Promise((resolve, reject) => {
+    make_API_call : function(){
+        let city = cities.citiesArray[getRandomInt(cities.citiesArray.length)];
+        let url = 'https://api.openweathermap.org/data/2.5/weather?lat='+ city.lat +'&lon=' + city.lng + '&appid=' + apiKey;
+        return new Promise((resolve, reject) =>{
             request(url, options, (err, res, body) => {
                 if (err) reject(err)
                 resolve(body)
