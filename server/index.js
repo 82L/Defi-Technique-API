@@ -11,9 +11,9 @@ let interval;
  *
  * @type {{}}
  */
-app.get('/', async (req, res) => {
-    res.send(await api_helper.make_API_call());
-});
+// app.get('/', async (req, res) => {
+//     res.send(await api_helper.make_API_call());
+// });
 
 io.on('connection', (socket) => {
     console.log('A client as connected');
@@ -29,6 +29,6 @@ server.listen(3000, async () => {
     interval = setInterval(async function () {
         apiResponse = await api_helper.make_API_call();
         io.emit("data", apiResponse);
-    }, 3000 * 3)
+    }, 3000 * 10)
 
 });
