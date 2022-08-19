@@ -14,12 +14,11 @@ module.exports = {
     */
     /**
      *
-     * @param city
      * @returns {Promise<String>}
      */
     make_API_call : function(){
         let city = cities.citiesArray[getRandomInt(cities.citiesArray.length)];
-        let url = 'https://api.openweathermap.org/data/2.5/weather?lat='+ city.lat +'&lon=' + city.lng + '&appid=' + apiKey;
+        let url = 'https://api.openweathermap.org/data/2.5/weather?units=metric&lat='+ city.lat +'&lon=' + city.lng + '&appid=' + apiKey;
         return new Promise((resolve, reject) =>{
             request(url, options, (err, res, body) => {
                 if (err) reject(err)

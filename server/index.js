@@ -25,10 +25,15 @@ io.on('connection', (socket) => {
 
 server.listen(3000, async () => {
     console.log('listening on *:3000');
+    console.log("Api called")
     apiResponse = await api_helper.make_API_call();
+    console.log("api response obtained")
     interval = setInterval(async function () {
+        console.log("Api called")
         apiResponse = await api_helper.make_API_call();
+        console.log("api response obtained, sending to socket clients")
         io.emit("data", apiResponse);
+        console.log("socket clients contacted")
     }, 3000 * 10)
 
 });
